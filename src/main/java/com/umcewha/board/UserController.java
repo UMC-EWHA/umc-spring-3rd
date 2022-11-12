@@ -1,3 +1,5 @@
+//Controller
+
 package com.umcewha.board;
 
 import com.umcewha.board.model.*;
@@ -6,25 +8,37 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/users")
 public class UserController {
 
-    private UserProvider userProvider;
-
     @Autowired
-    public UserController(UserProvider userProvider) {
-        this.userProvider = userProvider;
+    private UserService userService;
+
+    @GetMapping("")
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 
-    @GetMapping("/user")
-    public List<GetUserRes> getUser(){
-        List<GetUserRes> userRes = userProvider.getUser();
-        return userRes;
+    @GetMapping("/{username}")
+    public User getUserByUsername(@PathVariable  String username) {
+        return userService.getUserByUsername(username);
     }
 
-    @ResponseBody
-    @PostMapping("/user")
-    public PostUserRes postUser(@RequestBody PostUserReq postUserReq){
-        PostUserRes postUserRes = userProvider.postUser(postUserReq);
-        return postUserRes;
+    @PostMapping("")
+    public User insertUser(@RequestBody User user) {
+
+        return userService.insertUser(user);
+    }
+
+    @PutMapping("/{username}")
+    public void updateUser(@PathVariable String username, @RequestBody User user) {
+
+        userService.updateUser(username, user);
+    }
+
+    @DeleteMapping("/{username}")
+    public void deleteUser(@PathVariable String username) {
+        userService.deleteUser(username);
     }
 }
