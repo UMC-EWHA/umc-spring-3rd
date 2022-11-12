@@ -1,4 +1,4 @@
-package com.umc.umcserver.src.post.dto;
+package com.umc.umcserver.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

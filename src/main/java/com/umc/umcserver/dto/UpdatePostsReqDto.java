@@ -1,18 +1,18 @@
-package com.umc.umcserver.src.post.dto;
+package com.umc.umcserver.dto;
 
-import com.umc.umcserver.src.post.repository.Board;
+import com.umc.umcserver.repository.Board;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Getter
-@NoArgsConstructor
-public class CreatePostsReqDto {
+@RequiredArgsConstructor
+public class UpdatePostsReqDto {
     private String title;
     private String content;
     private String writer;
 
     // Dto에서 필요한 부분 entity화 시킴킴
-   public Board toEntity(){
+    public Board toEntity(){
         return Board.builder()
                 .title(title)
                 .content(content)
