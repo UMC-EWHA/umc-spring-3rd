@@ -1,7 +1,5 @@
-package com.umc.carrot.controller;
+package com.umc.board;
 
-import com.umc.carrot.entity.User;
-import com.umc.carrot.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
