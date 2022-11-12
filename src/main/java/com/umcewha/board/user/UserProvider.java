@@ -1,6 +1,6 @@
 //package com.umcewha.board;
 //
-//import com.umcewha.board.model.*;
+//import com.umcewha.board.user.model.*;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Service;
 //

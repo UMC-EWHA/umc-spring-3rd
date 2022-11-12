@@ -1,13 +1,10 @@
 //UserDao
 
-package com.umcewha.board;
+package com.umcewha.board.user;
 
-import com.umcewha.board.model.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+import com.umcewha.board.user.model.*;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 

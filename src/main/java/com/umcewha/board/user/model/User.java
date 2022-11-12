@@ -1,4 +1,4 @@
-package com.umcewha.board.model;
+package com.umcewha.board.user.model;
 
 public class User {
     private int userIdx;

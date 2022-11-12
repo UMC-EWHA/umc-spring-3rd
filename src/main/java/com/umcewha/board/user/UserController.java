@@ -1,8 +1,8 @@
 //Controller
 
-package com.umcewha.board;
+package com.umcewha.board.user;
 
-import com.umcewha.board.model.*;
+import com.umcewha.board.user.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
