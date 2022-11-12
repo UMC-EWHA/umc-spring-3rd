@@ -1,6 +1,6 @@
-package com.umc.umcserver.dto;
+package com.umc.umcserver.src.post.dto;
 
-import com.umc.umcserver.repository.Board;
+import com.umc.umcserver.src.post.repository.Board;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
