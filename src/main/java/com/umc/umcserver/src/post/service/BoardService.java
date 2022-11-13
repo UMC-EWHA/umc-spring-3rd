@@ -40,6 +40,14 @@ public class BoardService {
         return new FetchPostsResDto(board);
     }
 
+    // 게시글 제거
+    @Transactional
+    public void deleteBoard(Long postId) {
+        Board board = boardRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 id는 존재하지 않습니다"));
+        boardRepository.delete(board);
+    }
+
     // 데이터 업데이트
     @Transactional
     public UpdatePostsResDto updateBoard(Long postId, UpdatePostsReqDto requestDto) {
@@ -67,14 +75,6 @@ public class BoardService {
         }
 
         return new UpdatePostsResDto(board);
-    }
-
-    // 게시글 제거
-    @Transactional
-    public void deleteBoard(Long postId) {
-        Board board = boardRepository.findById(postId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 id는 존재하지 않습니다"));
-        boardRepository.delete(board);
     }
 
 

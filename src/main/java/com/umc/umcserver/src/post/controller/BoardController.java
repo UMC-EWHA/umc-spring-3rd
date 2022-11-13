@@ -48,6 +48,13 @@ public class BoardController {
         return ResponseEntity.ok(responseDto);
     }
 
+
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<Long> deleteBoard(@PathVariable Long postId) {
+        boardService.deleteBoard(postId);
+        return ResponseEntity.ok(postId);
+    }
+
     // id에 해당하는 게시글 데이터 전체 수정
     @PutMapping("/{postId}")
     public ResponseEntity<UpdatePostsResDto> updateBoard(@PathVariable Long postId, @RequestBody UpdatePostsReqDto requestDto) {
@@ -78,12 +85,6 @@ public class BoardController {
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-    }
-
-    @DeleteMapping("/{postId}")
-    public ResponseEntity<Long> deleteBoard(@PathVariable Long postId) {
-        boardService.deleteBoard(postId);
-        return ResponseEntity.ok(postId);
     }
 }
 
