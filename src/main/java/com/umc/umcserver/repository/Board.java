@@ -1,4 +1,4 @@
-package com.umc.umcserver.src.post.repository;
+package com.umc.umcserver.repository;
 
 import lombok.Builder;
 import lombok.Getter;

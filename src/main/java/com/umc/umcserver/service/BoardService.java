@@ -1,8 +1,8 @@
-package com.umc.umcserver.src.post.service;
+package com.umc.umcserver.service;
 
-import com.umc.umcserver.src.post.dto.*;
-import com.umc.umcserver.src.post.repository.Board;
-import com.umc.umcserver.src.post.repository.BoardRepository;
+import com.umc.umcserver.dto.*;
+import com.umc.umcserver.repository.Board;
+import com.umc.umcserver.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,9 +13,7 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-@Transactional(readOnly = true)
 public class BoardService {
-
     private final BoardRepository boardRepository;
 
     // 게시물 생성
@@ -40,14 +38,6 @@ public class BoardService {
         return new FetchPostsResDto(board);
     }
 
-    // 게시글 제거
-    @Transactional
-    public void deleteBoard(Long postId) {
-        Board board = boardRepository.findById(postId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 id는 존재하지 않습니다"));
-        boardRepository.delete(board);
-    }
-
     // 데이터 업데이트
     @Transactional
     public UpdatePostsResDto updateBoard(Long postId, UpdatePostsReqDto requestDto) {
@@ -59,7 +49,7 @@ public class BoardService {
 
     // 일부 정보 업데이트
     @Transactional
-    public UpdatePostsResDto PatchBoard(Long postId, UpdatePostsReqDto requestDto){
+    public UpdatePostsResDto PatchBoard(Long postId, UpdatePostsReqDto requestDto) {
         Board board = boardRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 id는 존재하지 않습니다"));
         List<UpdatePostsReqDto> lists = new ArrayList<>();
@@ -77,5 +67,12 @@ public class BoardService {
         return new UpdatePostsResDto(board);
     }
 
+    // 게시글 제거
+    @Transactional
+    public void deleteBoard(Long postId) {
+        Board board = boardRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 id는 존재하지 않습니다"));
+        boardRepository.delete(board);
+    }
 
 }
