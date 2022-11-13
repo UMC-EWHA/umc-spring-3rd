@@ -1,4 +1,4 @@
-package com.umc.umcserver.src.test;
+package com.umc.umcserver.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
