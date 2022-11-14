@@ -38,6 +38,13 @@ public class BoardService {
         return new FetchPostsResDto(board);
     }
 
+    //해당 title에 대한 데이터 조회
+    @Transactional
+    public List<FetchPostsResDto> fetchByTitleBoard(String title){
+        List<Board> list = boardRepository.findByTitle(title);
+        return list.stream().map(FetchPostsResDto::new).collect(Collectors.toList());
+    }
+
     // 데이터 업데이트
     @Transactional
     public UpdatePostsResDto updateBoard(Long postId, UpdatePostsReqDto requestDto) {

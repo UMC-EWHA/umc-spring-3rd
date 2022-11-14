@@ -18,7 +18,7 @@ public class BoardController {
 
     // 게시글 생성
     @PostMapping
-    public ResponseEntity<CreatePostsResDto> CreateBoard(@RequestBody CreatePostsReqDto requestDto) {
+    public ResponseEntity<CreatePostsResDto> createBoard(@RequestBody CreatePostsReqDto requestDto) {
 
         try {
             CreatePostsResDto responseDto;
@@ -36,17 +36,33 @@ public class BoardController {
 
     // 게시물 전체 조회
     @GetMapping
-    public List<FetchPostsResDto> FetchAllBoard() {
+    public List<FetchPostsResDto> fetchAllBoard() {
         return boardService.fetchAllBoard();
 
     }
 
-    // id에 해당하는 게시글 수정
+    // id에 해당하는 게시글 조회
     @GetMapping("/{postId}")
     public ResponseEntity<FetchPostsResDto> findBoard(@PathVariable Long postId) {
 
         FetchPostsResDto responseDto = boardService.fetchBoard(postId);
         return ResponseEntity.ok(responseDto);
+    }
+
+    // query string 이용하여 해당 title 갖는 게시글 조회하기
+    @GetMapping("/query")
+    public ResponseEntity<List<FetchPostsResDto>> findByTitleBoard(@RequestParam(required = false) String title) {
+        try {
+            List<FetchPostsResDto> responseDto;
+            if (title == null) {
+                responseDto = boardService.fetchAllBoard();
+            } else {
+                responseDto = boardService.fetchByTitleBoard(title);
+            }
+            return ResponseEntity.ok(responseDto);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 
 
