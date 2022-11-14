@@ -1,17 +1,17 @@
 package com.example.demo.src.board;
 
+import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
-import com.example.demo.src.board.model.PostBoardReq;
-import com.example.demo.src.board.model.PostBoardRes;
-import com.example.demo.src.user.model.PostUserRes;
+import com.example.demo.src.board.model.*;
 import com.example.demo.utils.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static com.example.demo.config.BaseResponseStatus.*;
-import static com.example.demo.utils.ValidationRegex.isRegexEmail;
 
 @RestController
 @RequestMapping("/app/boards")
@@ -37,7 +37,7 @@ public class BoardController {
     * [POST] / boards
     */
     @ResponseBody
-    @PostMapping("/upload")
+    @PostMapping("/post")
     public BaseResponse<PostBoardRes> uploadBoard(@RequestBody PostBoardReq postBoardReq) {
 
         if (postBoardReq.getTitle() == null) {
@@ -49,5 +49,43 @@ public class BoardController {
         PostBoardRes postBoardRes = boardService.uploadBoard(postBoardReq);
 
         return new BaseResponse<>(postBoardRes);
+    }
+
+    /*
+     *게시글 리스트 조회 API
+     * [GET] / boards
+     */
+    @ResponseBody
+    @GetMapping("")
+    public BaseResponse<List<GetPostRes>> getPosts(@RequestParam(required = false) String writer){
+        try{
+            if(writer == null){
+                List<GetPostRes> getPostsRes = boardProvider.getPosts();
+                return new BaseResponse<>(getPostsRes);
+            }
+            List<GetPostRes> getPostRes = boardProvider.getPostByWriter(writer);
+            return new BaseResponse<>(getPostRes);
+
+        } catch (BaseException exception) {
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+
+    /*
+     *게시글 내용 수정 API
+     * [PATCH] / boards
+     */
+   @ResponseBody
+   @PatchMapping("/{postIdx}")
+    public BaseResponse<String> modifyPostContent(@PathVariable("postIdx") int postIdx, @RequestBody Post post) {
+        try {
+            PatchPostReq patchPostReq = new PatchPostReq(postIdx, post.getContent());
+            boardService.modifyPostContent(patchPostReq);
+
+            String result = "게시글이 수정되었습니다.";
+            return new BaseResponse<>(result);
+        } catch (BaseException exception){
+            return new BaseResponse<>(exception.getStatus());
+        }
     }
 }

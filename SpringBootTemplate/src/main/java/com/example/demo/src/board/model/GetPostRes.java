@@ -1,13 +1,14 @@
 package com.example.demo.src.board.model;
 
-import lombok.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PostBoardReq {
+public class GetPostRes {
+    private int postIdx;
     private String title;
     private String writer;
     private String content;
