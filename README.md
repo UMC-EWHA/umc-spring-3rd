@@ -4,7 +4,9 @@ UMC-EWHA 3rd Server-Spring
 ## ✔️ Stack
 spring jap, spring boot, mysql, aws
 
-## ❄️ Spring Server 파트 커리큘럼
+<br>
+
+## ✔️ Spring Server 파트 커리큘럼
 | 주차 | 주제 | 스탠다드 미션 | 
 |:----:|:-----:|:----:|
 | `1주차` | APM 구축, 컴파일 설치 | [스탠다드 미션✨] |
@@ -16,6 +18,7 @@ spring jap, spring boot, mysql, aws
 | `7주차` | Restful한 API 개발, EC2 서버 무중단 배포 | [스탠다드 미션✨] | 
 | `8주차` | |  | |  |
 
+<br>
 
 ## ✔️ Process
 * rds mysql spring jpa와 연결
