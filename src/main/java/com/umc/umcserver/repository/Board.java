@@ -38,4 +38,14 @@ public class Board {
         this.content = content;
         this.writer = writer;
     }
+
+    public void updateTitle(String title){
+        this.title = title;
+    }
+    public void updateContent(String content){
+        this.content = content;
+    }
+    public void updateWriter(String writer){
+        this.writer = writer;
+    }
 }

@@ -18,7 +18,7 @@ public class BoardController {
 
     // 게시글 생성
     @PostMapping
-    public ResponseEntity<CreatePostsResDto> CreateBoard(@RequestBody CreatePostsReqDto requestDto) {
+    public ResponseEntity<CreatePostsResDto> createBoard(@RequestBody CreatePostsReqDto requestDto) {
 
         try {
             CreatePostsResDto responseDto;
@@ -36,12 +36,12 @@ public class BoardController {
 
     // 게시물 전체 조회
     @GetMapping
-    public List<FetchPostsResDto> FetchAllBoard() {
+    public List<FetchPostsResDto> fetchAllBoard() {
         return boardService.fetchAllBoard();
 
     }
 
-    // id에 해당하는 게시글 수정
+    // id에 해당하는 게시글 조회
     @GetMapping("/{postId}")
     public ResponseEntity<FetchPostsResDto> findBoard(@PathVariable Long postId) {
 
@@ -49,15 +49,57 @@ public class BoardController {
         return ResponseEntity.ok(responseDto);
     }
 
-    // id에 해당하는 게시글 수정
+    // query string 이용하여 해당 title 갖는 게시글 조회하기
+    @GetMapping("/query")
+    public ResponseEntity<List<FetchPostsResDto>> findByTitleBoard(@RequestParam(required = false) String title) {
+        try {
+            List<FetchPostsResDto> responseDto;
+            if (title == null) {
+                responseDto = boardService.fetchAllBoard();
+            } else {
+                responseDto = boardService.fetchByTitleBoard(title);
+            }
+            return ResponseEntity.ok(responseDto);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+
+    // id에 해당하는 게시글 데이터 전체 수정
     @PutMapping("/{postId}")
     public ResponseEntity<UpdatePostsResDto> updateBoard(@PathVariable Long postId, @RequestBody UpdatePostsReqDto requestDto) {
-        UpdatePostsResDto responseDto = boardService.updateBoard(postId, requestDto);
-        return ResponseEntity.ok(responseDto);
+        try {
+            UpdatePostsResDto responseDto;
+            if (requestDto.getTitle() == null && requestDto.getWriter() == null && requestDto.getWriter() == null) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            } else {
+                responseDto = boardService.updateBoard(postId, requestDto);
+                return ResponseEntity.ok(responseDto);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    // 일부 정보 업데이트
+    @PatchMapping("/{postId}")
+    public ResponseEntity<UpdatePostsResDto> patchUpdateBoard(@PathVariable Long postId, @RequestBody UpdatePostsReqDto requestDto) {
+        try {
+            UpdatePostsResDto responseDto;
+            if (requestDto.getTitle() == null && requestDto.getWriter() == null && requestDto.getWriter() == null) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            } else {
+                responseDto = boardService.PatchBoard(postId, requestDto);
+                return ResponseEntity.ok(responseDto);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     @DeleteMapping("/{postId}")
-    public ResponseEntity<Long> deleteBoard(@PathVariable Long postId){
+    public ResponseEntity<Long> deleteBoard(@PathVariable Long postId) {
         boardService.deleteBoard(postId);
         return ResponseEntity.ok(postId);
     }
