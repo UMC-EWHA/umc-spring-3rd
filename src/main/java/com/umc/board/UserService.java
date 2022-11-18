@@ -1,7 +1,5 @@
-package com.umc.carrot.service;
+package com.umc.board;
 
-import com.umc.carrot.entity.User;
-import com.umc.carrot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
