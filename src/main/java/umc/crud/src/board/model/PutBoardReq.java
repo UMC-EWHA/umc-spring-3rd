@@ -10,4 +10,11 @@ public class PutBoardReq {
     private int boardId;
     private String content;
     private String writer;
+
+    public PutBoardReq(int boardId, String content) {
+        this.boardId = boardId;
+        this.content = content;
+    }
+
+
 }
