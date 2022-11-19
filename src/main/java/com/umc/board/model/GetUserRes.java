@@ -10,7 +10,7 @@ import lombok.Setter;
 // 회원 정보 조회 요청의 결과
 public class GetUserRes {
     private int userIdx;
-    private String nickname;
+    private String name;
     private String email;
     private String password;
 }
