@@ -18,12 +18,10 @@ import static com.example.demo.config.BaseResponseStatus.*;
 
 @Service
 public class JwtService {
+    //JWT 생성
+  /*  @param userIdx
+    @return String*/
 
-    /*
-    JWT 생성
-    @param userIdx
-    @return String
-     */
     public String createJwt(int userIdx){
         Date now = new Date();
         return Jwts.builder()
@@ -35,20 +33,20 @@ public class JwtService {
                 .compact();
     }
 
-    /*
-    Header에서 X-ACCESS-TOKEN 으로 JWT 추출
-    @return String
-     */
+
+    //Header에서 X-ACCESS-TOKEN 으로 JWT 추출
+    //@return String
+
     public String getJwt(){
         HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
         return request.getHeader("X-ACCESS-TOKEN");
     }
 
-    /*
-    JWT에서 userIdx 추출
-    @return int
-    @throws BaseException
-     */
+
+    //JWT에서 userIdx 추출
+   /* @return int
+    @throws BaseException*/
+
     public int getUserIdx() throws BaseException{
         //1. JWT 추출
         String accessToken = getJwt();
