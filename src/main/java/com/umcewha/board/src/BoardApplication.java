@@ -1,4 +1,4 @@
-package com.umcewha.board;
+package com.umcewha.board.src;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
