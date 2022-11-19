@@ -1,6 +1,6 @@
-package com.umc.board;
+package com.umc.board.user;
 
-import com.umc.board.model.*;
+import com.umc.board.user.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

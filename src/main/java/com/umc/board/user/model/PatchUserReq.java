@@ -1,4 +1,4 @@
-package com.umc.board.model;
+package com.umc.board.user.model;
 
 import lombok.*;
 
