@@ -2,6 +2,7 @@ package umc.crud.src.board;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import umc.crud.config.BaseException;
 import umc.crud.config.BaseResponseStatus;
 import umc.crud.src.board.model.*;
@@ -38,6 +39,7 @@ public class BoardService {
      * @return
      * @throws BaseException
      */
+    @Transactional
     public PostBoardRes writeBoard(PostBoardReq postBoardReq) throws BaseException{
 
         try {
@@ -53,6 +55,7 @@ public class BoardService {
      * @param putBoardReq
      * @throws BaseException
      */
+    @Transactional
     public void modifyContent(PutBoardReq putBoardReq) throws BaseException {
         try {
             int result = boardDao.modifyContent(putBoardReq);
@@ -68,6 +71,7 @@ public class BoardService {
      * 글 삭제
      * @param boardId
      */
+    @Transactional
     public void deleteBoard(int boardId) {
         boardDao.deleteBoard(boardId);
     }
