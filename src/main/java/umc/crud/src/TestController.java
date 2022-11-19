@@ -1,4 +1,4 @@
-package umc.crud;
+package umc.crud.src;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
