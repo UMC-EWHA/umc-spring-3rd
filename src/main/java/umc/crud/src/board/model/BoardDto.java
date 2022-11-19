@@ -1,4 +1,4 @@
-package umc.crud.board.model;
+package umc.crud.src.board.model;
 
 public class BoardDto {
     private int boardId;
