@@ -12,6 +12,7 @@ public class PostController {
     @Autowired
     private PostService postService;
     private PostProvider postProvider;
+
  
     @GetMapping("")
     public List<Post> getAllPosts() {

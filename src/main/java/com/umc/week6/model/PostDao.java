@@ -18,6 +18,7 @@ public class PostDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
     /*
+
     static {
         posts = new ArrayList<>();
         posts.add(new Post(1,"title1","content1", "123"));

@@ -1,14 +1,11 @@
 package com.umc.week6.model;
-import lombok.*;
-//@Getter
-//@Setter
-//@AllArgsConstructor
+
 public class Post {
     private int postnum;
     private String title;
     private String content;
     private String userid;
-    
+
     public Post() {
     }
  
@@ -50,5 +47,5 @@ public class Post {
     public void setUserid(String userid) {
         this.userid = userid;
     }
-    
+
 }
