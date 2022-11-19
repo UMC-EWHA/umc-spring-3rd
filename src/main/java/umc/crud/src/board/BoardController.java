@@ -27,7 +27,6 @@ public class BoardController {
 
             if(postBoardReq.getWriter() != null) {
                 postBoardRes = boardService.writeBoard(postBoardReq);
-
                 return new BaseResponse<>(postBoardRes);
             } else {
                 throw new BaseException(REQUEST_ERROR);
@@ -35,6 +34,7 @@ public class BoardController {
         } catch (BaseException exception) {
             return new BaseResponse<>(exception.getStatus());
         }
+
     }
 
     /**
@@ -43,9 +43,9 @@ public class BoardController {
      */
     @ResponseBody
     @GetMapping("")
-    public List<GetBoardRes> getAllBoards(@RequestBody GetBoardReq getBoardReq) {
+    public List<GetBoardRes> getAllBoards() {
 
-        return boardService.getAllBoards(getBoardReq);
+        return boardService.getAllBoards();
     }
 
     /**
@@ -53,21 +53,23 @@ public class BoardController {
      * GET /boards/{writer}
      */
     @GetMapping("/{writer}")
-    public BaseResponse<GetBoardRes> getBoardByWriter(@PathVariable String writer) {
-        GetBoardRes getBoardRes = boardService.getBoardByWriter(writer);
+    public BaseResponse<List<GetBoardRes>> getBoardByWriter(@PathVariable String writer) {
+        List<GetBoardRes> getBoardRes = boardService.getBoardByWriter(writer);
         return new BaseResponse<>(getBoardRes);
     }
 
     /**
      * 글 수정 API
-     * PUT /boards/{writer}
+     * PUT /boards/{boardId}
      */
-    @PutMapping("/{writer}")
-    public BaseResponse<PutBoardRes> modifyBoard(@PathVariable String writer, @RequestBody PutBoardReq putBoardReq) {
+    @PutMapping("/{boardId}")
+    public BaseResponse<String> modifyContent(@PathVariable("boardId") int boardId, @RequestBody PutBoardReq putBoardReq) {
+
+        /*
         try {
             if(putBoardReq.getWriter() != null) {
                 PutBoardRes putBoardRes;
-                putBoardRes = boardService.modifyBoard(writer, putBoardReq);
+                putBoardRes = boardService.modifyContent(putBoardReq);
                 return new BaseResponse<>(putBoardRes);
             } else {
                 throw new BaseException(RESPONSE_ERROR);
@@ -75,15 +77,26 @@ public class BoardController {
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }
+        */
+
+        try {
+            PutBoardReq boardReq = new PutBoardReq(boardId, putBoardReq.getContent());
+            boardService.modifyContent(putBoardReq);
+
+            String result = "내용이 수정되었습니다.";
+            return new BaseResponse<>(result);
+        } catch (BaseException exception) {
+            return new BaseResponse<>(exception.getStatus());
+        }
     }
 
     /**
      * 글 삭제 API
-     * DELETE /boards/{writer}
+     * DELETE /boards/{boardId}
      */
-    @DeleteMapping("/{writer}")
-    public void removeBoard(@PathVariable String writer) {
+    @DeleteMapping("/{boardId}")
+    public void removeBoard(@PathVariable int boardId) {
 
-        boardService.removeBoard(writer);
+        boardService.deleteBoard(boardId);
     }
 }
