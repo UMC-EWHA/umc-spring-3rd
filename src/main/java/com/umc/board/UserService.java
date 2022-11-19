@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static org.apache.tomcat.util.net.openssl.ciphers.Encryption.AES128;
+
 @Service
 public class UserService {
     private final UserDao userDao;
@@ -29,6 +31,14 @@ public class UserService {
         if (checkEmail(postUserReq.getEmail()) == 1) {
             throw new Exception("이미 존재하는 이메일");
         }
+
+        try {
+            String password = new AES128(Secret.USER_INFO_PASSWORD_KEY).encrypt(postUserReq.getPassword());
+            postUserReq.setPassword(password);
+        } catch (Exception e) {
+            throw new Exception("비밀번호 암호화 오류");
+        }
+
         try {
             int userIdx = userDao.createUser(postUserReq);
             return new PostUserRes(userIdx);
@@ -52,6 +62,12 @@ public class UserService {
     // 로그인
     public PostLoginRes logIn(PostLoginReq postLoginReq) throws Exception {
         User user = userDao.getPassword(postLoginReq);
+        try {
+            String password = new AES128(Secret.USER_INFO_PASSWORD_KEY).decrypt(user.getPassword());
+        } catch (Exception e) {
+            throw new Exception("비밀번호 암호화 오류");
+        }
+
         if (postLoginReq.getPassword().equals(user.getPassword())) {
             int userIdx = userDao.getPassword(postLoginReq).getUserIdx();
             return new PostLoginRes(userIdx);
