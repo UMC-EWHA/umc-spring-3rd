@@ -15,12 +15,12 @@ public class PostController {
  
     @GetMapping("")
     public List<Post> getAllPosts() {
-        return postProvider.getAllPosts();
+        return postService.getAllPosts();
     }
  
     @GetMapping("/{userid}")
     public Post getPostByUserId(@PathVariable  String userid) {
-        return postProvider.getPostByUserId(userid);
+        return postService.getPostByUserId(userid);
     }
  
     @PostMapping("")
