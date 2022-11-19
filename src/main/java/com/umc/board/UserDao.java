@@ -71,11 +71,21 @@ public class UserDao {
         );
     }
 
-    // 회원정보 수정
+    // 회원 정보 수정
     public int modifyUser(PatchUserReq patchUserReq) {
         String modifyUserQuery = "update User set name = ? where userIdx = ?";
         Object[] modifyUserParams = new Object[]{patchUserReq.getName(), patchUserReq.getUserIdx()};
 
         return this.jdbcTemplate.update(modifyUserQuery, modifyUserParams);
+    }
+
+    // 이메일 중복 확인
+    public int checkEmail(String email) {
+        String checkEmailQuery = "select exist(select email from User where email = ?)";
+        String checkEmailParams = email;
+
+        return this.jdbcTemplate.queryForObject(checkEmailQuery,
+                int.class,
+                checkEmailParams);
     }
 }
