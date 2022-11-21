@@ -7,34 +7,18 @@ import umc.crud.config.BaseException;
 import umc.crud.config.BaseResponseStatus;
 import umc.crud.src.board.model.*;
 
-import java.util.List;
 
 @Service
 public class BoardService {
     @Autowired
-    BoardDao boardDao;
+    private BoardDao boardDao;
 
-    /**
-     * 모든 글 조회
-     * @return
-     */
-    public List<GetBoardRes> getAllBoards() {
-
-        return boardDao.getAllBoards();
-    }
-
-    /**
-     * 특정 글 조회
-     * @param writer
-     * @return
-     */
-    public List<GetBoardRes> getBoardByWriter(String writer) {
-
-        return boardDao.getBoardByWriter(writer);
-    }
+    @Autowired
+    private BoardProvider boardProvider;
 
     /**
      * 글 생성
+     * POST
      * @param postBoardReq
      * @return
      * @throws BaseException
@@ -52,6 +36,7 @@ public class BoardService {
 
     /**
      * 글 내용 수정
+     * PUT
      * @param putBoardReq
      * @throws BaseException
      */
@@ -69,6 +54,7 @@ public class BoardService {
 
     /**
      * 글 삭제
+     * DELETE
      * @param boardId
      */
     @Transactional
