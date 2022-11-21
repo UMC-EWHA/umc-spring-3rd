@@ -3,6 +3,7 @@ package com.example.demo.src.board;
 import com.example.demo.src.board.model.GetPostRes;
 import com.example.demo.src.board.model.PatchPostReq;
 import com.example.demo.src.board.model.PostBoardReq;
+import com.example.demo.utils.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -28,15 +29,16 @@ public class BoardDao {
         return this.jdbcTemplate.queryForObject(lastInsertIdQuery, int.class); // 해당 쿼리문의 결과 마지막으로 삽인된 유저의 userIdx번호를 반환한다.
     }
 
-    public List<GetPostRes> getPosts() {
-        String getPostsQuery = "select * from Posts";
+    public List<GetPostRes> getPosts(Pagination pagination) {
+        String getPostsQuery = "select * from Posts limit ? offset ?";
+        Object[] getPostsParams = new Object[]{pagination.getLimit(), pagination.getOffSet()};
         return this.jdbcTemplate.query(getPostsQuery,
                 (rs, rowNum) -> new GetPostRes(
                         rs.getInt("postIdx"),
                         rs.getString("title"),
                         rs.getString("writer"),
-                        rs.getString("content")
-                ));
+                        rs.getString("content")),
+                getPostsParams);
     }
 
     public List<GetPostRes> getPostsByWriter(String writer) {
