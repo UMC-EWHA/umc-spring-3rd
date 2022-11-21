@@ -1,17 +1,14 @@
 package com.umc.week6.model;
-//import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import lombok.*;/*
-@Getter
-@Setter
-@AllArgsConstructor
-*/
+import lombok.*;
+//@Getter
+//@Setter
+//@AllArgsConstructor
 public class Post {
     private int postnum;
     private String title;
     private String content;
     private String userid;
-    
+
     public Post() {
     }
  
@@ -53,6 +50,5 @@ public class Post {
     public void setUserid(String userid) {
         this.userid = userid;
     }
-    
     
 }
