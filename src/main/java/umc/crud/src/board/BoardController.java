@@ -15,6 +15,9 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
+    @Autowired
+    private BoardProvider boardProvider;
+
     /**
      * 글 등록 API
      * POST /boards
@@ -45,7 +48,7 @@ public class BoardController {
     @GetMapping("")
     public List<GetBoardRes> getAllBoards() {
 
-        return boardService.getAllBoards();
+        return boardProvider.getAllBoards();
     }
 
     /**
@@ -54,7 +57,7 @@ public class BoardController {
      */
     @GetMapping("/{writer}")
     public BaseResponse<List<GetBoardRes>> getBoardByWriter(@PathVariable String writer) {
-        List<GetBoardRes> getBoardRes = boardService.getBoardByWriter(writer);
+        List<GetBoardRes> getBoardRes = boardProvider.getBoardByWriter(writer);
         return new BaseResponse<>(getBoardRes);
     }
 
