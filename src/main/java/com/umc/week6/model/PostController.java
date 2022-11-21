@@ -12,7 +12,7 @@ public class PostController {
     @Autowired
     private PostService postService;
     @Autowired
-    private PostProvider postProvider;   //@Autwired는 각각
+    private PostProvider postProvider;   //@Autowired는 각각 붙여줘야 함!**
  
     @GetMapping("")
     public List<Post> getAllPosts() {
@@ -37,7 +37,7 @@ public class PostController {
     }
  
     @DeleteMapping("/{userid}")
-    public void removePost(@PathVariable String userid) {
-       postService.removePost(userid);
+    public void removePostByUserId(@PathVariable String userid) {
+       postService.removePostByUserId(userid);
     }
 }

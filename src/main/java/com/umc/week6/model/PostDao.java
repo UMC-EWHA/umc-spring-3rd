@@ -44,9 +44,7 @@ public class PostDao {
  
     // Insert Post
     public Post insertPost(Post post) {
-        //posts.add(post);
-        //return post;
-        String createPostQuery = "insert into post (postnum, title, content, userid) VALUES (?,?,?,?)"; // 실행될 동적 쿼리문
+        String createPostQuery = "insert into post (postnum, title, content, userid) VALUES (?,?,?,?)"; // 동적 쿼리문
         //getPostNum() 대소문자 구분...? 자꾸 값이 0으로 들어갔었음
         Object[] createPostParams = new Object[]{post.getPostnum(), post.getTitle(), post.getContent(), post.getUserid()}; // 동적 쿼리의 ?부분에 주입될 값
         this.jdbcTemplate.update(createPostQuery, createPostParams);
@@ -63,17 +61,18 @@ public class PostDao {
                     lastInsertIdParams);      //getter쓰니까 get()을 못받아와서 그냥 함수 다 씀 Post.java에서...
     }
  
-    // Modify Post
-    public void updatePost(String userid,Post post) {
-        posts.stream()
-                .filter(curUser -> curUser.getUserid().equals(userid))
-                .findAny()
-                .orElse(new Post(-1, "", "", ""))
-                .setTitle(post.getTitle());
+    // Modify PostTitle
+    public void updatePostTitle(String userid,Post post) {
+        String modifyPostTitleQuery = "update post set title = ? where userid = ? "; // 해당 userid를 만족하는 post의 title을 수정한다.
+        Object[] modifyPostTitleParams = new Object[]{post.getTitle(), post.getUserid()}; // 주입될 값들(title, userid)
+        this.jdbcTemplate.update(modifyPostTitleQuery, modifyPostTitleParams);
     }
  
     // Delete Post
-    public void deletePost(String userid) {
-        posts.removeIf(post -> post.getUserid().equals(userid));
+    // delete를 구현하긴 했지만 보통 status를 비활성화로 수정하는 방법을 많이 이용. delete는 거의 안쓰임.
+    public void deletePostByUserId(String userid) {
+        String deletePostQuery = "delete from post where userid = ? "; // 해당 userid를 만족하는 post를 삭제한다.
+        String deletePostParams = userid;
+        this.jdbcTemplate.update(deletePostQuery, deletePostParams);
     }
 }
