@@ -11,16 +11,17 @@ import java.util.List;
 public class PostController {
     @Autowired
     private PostService postService;
-    private PostProvider postProvider;
+    @Autowired
+    private PostProvider postProvider;   //@Autwired는 각각
  
     @GetMapping("")
     public List<Post> getAllPosts() {
-        return postService.getAllPosts();
+        return postProvider.getAllPosts();
     }
  
     @GetMapping("/{userid}")
     public Post getPostByUserId(@PathVariable  String userid) {
-        return postService.getPostByUserId(userid);
+        return postProvider.getPostByUserId(userid);
     }
  
     @PostMapping("")

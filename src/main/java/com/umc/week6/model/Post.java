@@ -1,8 +1,11 @@
 package com.umc.week6.model;
-import lombok.*;
-//@Getter
-//@Setter
-//@AllArgsConstructor
+//import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import lombok.*;/*
+@Getter
+@Setter
+@AllArgsConstructor
+*/
 public class Post {
     private int postnum;
     private String title;
@@ -19,11 +22,11 @@ public class Post {
         this.userid = userid;
     }
  
-    public int getPostNum() {
+    public int getPostnum() {
         return postnum;
     }
  
-    public void setPostNum(int postnum) {
+    public void setPostnum(int postnum) {
         this.postnum = postnum;
     }
  
@@ -50,5 +53,6 @@ public class Post {
     public void setUserid(String userid) {
         this.userid = userid;
     }
+    
     
 }

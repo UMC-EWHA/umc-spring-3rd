@@ -17,44 +17,53 @@ public class PostDao {
     public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
-    /*
-    static {
-        posts = new ArrayList<>();
-        posts.add(new Post(1,"title1","content1", "123"));
-        posts.add(new Post(2,"title2","content2", "456"));
-        posts.add(new Post(3,"title3","content3", "789"));
-        posts.add(new Post(4,"title4","content4", "000"));
-    }
-    */
  
     public List<Post> getAllPosts() {
-        //return posts;
-        String getUsersQuery = "select * from post"; //User 테이블에 존재하는 모든 회원들의 정보를 조회하는 쿼리
-        return this.jdbcTemplate.query(getUsersQuery,
+        String getPostsQuery = "select * from post"; //존재하는 모든 posts 조회하는 쿼리
+        return this.jdbcTemplate.query(getPostsQuery,
                 (rs, rowNum) -> new Post(
                         rs.getInt("postnum"),
                         rs.getString("title"),
                         rs.getString("content"),
-                        rs.getString("userid")) // RowMapper(위의 링크 참조): 원하는 결과값 형태로 받기
+                        rs.getString("userid"))
         );
     }
 
     public Post getPostByUserId(String userid) {
-        return posts
-                .stream()
-                .filter(post -> post.getUserid().equals(userid))
-                .findAny()
-                .orElse(new Post(-1, "", "", ""));
+        String getPostByIdQuery = "select * from post where userid =?"; // 해당 userid을 만족하는 post를 조회하는 쿼리문
+        String getPostByIdParams = userid;
+        return this.jdbcTemplate.queryForObject(getPostByIdQuery,    //queryForObject 메소드 사용 List->Post object 하나로 convert하니까
+                (rs, rowNum) -> new Post(
+                        rs.getInt("postnum"),
+                        rs.getString("title"),
+                        rs.getString("content"),
+                        rs.getString("userid")),
+                getPostByIdParams);
+
     }
  
-    // Insert User
+    // Insert Post
     public Post insertPost(Post post) {
-        posts.add(post);
- 
-        return post;
+        //posts.add(post);
+        //return post;
+        String createPostQuery = "insert into post (postnum, title, content, userid) VALUES (?,?,?,?)"; // 실행될 동적 쿼리문
+        //getPostNum() 대소문자 구분...? 자꾸 값이 0으로 들어갔었음
+        Object[] createPostParams = new Object[]{post.getPostnum(), post.getTitle(), post.getContent(), post.getUserid()}; // 동적 쿼리의 ?부분에 주입될 값
+        this.jdbcTemplate.update(createPostQuery, createPostParams);
+        System.out.println(post.getPostnum());
+
+        String lastInsertIdQuery = "select * from post where userid =?"; // 해당 userid을 만족하는 post를 조회하는 쿼리문
+        String lastInsertIdParams = post.getUserid();
+        return this.jdbcTemplate.queryForObject(lastInsertIdQuery,    //queryForObject 메소드 사용 List->Post object 하나로 convert하니까
+                (rs, rowNum) -> new Post(
+                        rs.getInt("postnum"),
+                        rs.getString("title"),
+                        rs.getString("content"),
+                        rs.getString("userid")),
+                    lastInsertIdParams);      //getter쓰니까 get()을 못받아와서 그냥 함수 다 씀 Post.java에서...
     }
  
-    // Modify User
+    // Modify Post
     public void updatePost(String userid,Post post) {
         posts.stream()
                 .filter(curUser -> curUser.getUserid().equals(userid))
@@ -63,6 +72,7 @@ public class PostDao {
                 .setTitle(post.getTitle());
     }
  
+    // Delete Post
     public void deletePost(String userid) {
         posts.removeIf(post -> post.getUserid().equals(userid));
     }
