@@ -8,5 +8,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class FetchPostsReqDto {
     private Long id;
+    private Integer pageIndex;
 
 }

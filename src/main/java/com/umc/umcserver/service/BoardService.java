@@ -4,6 +4,10 @@ import com.umc.umcserver.dto.*;
 import com.umc.umcserver.repository.Board;
 import com.umc.umcserver.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,9 +29,19 @@ public class BoardService {
 
     // 모든 데이터 조회
     @Transactional
-    public List<FetchPostsResDto> fetchAllBoard() {
-        List<Board> list = boardRepository.findAll();
-        return list.stream().map(FetchPostsResDto::new).collect(Collectors.toList());
+    public List<FetchPostsResDto> fetchAllBoard(FetchPostsReqDto requestDto) {
+        Page<Board> boardPage;
+
+        // 페이지 당 5개 가져오기
+        int RECRUIT_PER_PAGE = 5;
+
+        // 요청된 정보를 기반으로 Pageable 객체 생성
+        int pageIndex = requestDto.getPageIndex() == null ? 0 : requestDto.getPageIndex();
+        Pageable pageable = PageRequest.of(pageIndex, RECRUIT_PER_PAGE, Sort.Direction.DESC, "id");
+
+        boardPage = boardRepository.findAll(pageable);
+
+        return boardPage.stream().map(FetchPostsResDto::new).collect(Collectors.toList());
     }
 
     // 특정 id에 대한 데이터 조회

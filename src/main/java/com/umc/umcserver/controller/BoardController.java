@@ -36,8 +36,8 @@ public class BoardController {
 
     // 게시물 전체 조회
     @GetMapping
-    public List<FetchPostsResDto> fetchAllBoard() {
-        return boardService.fetchAllBoard();
+    public List<FetchPostsResDto> fetchAllBoard(@RequestBody FetchPostsReqDto requestDto) {
+        return boardService.fetchAllBoard(requestDto);
 
     }
 
@@ -53,9 +53,10 @@ public class BoardController {
     @GetMapping("/query")
     public ResponseEntity<List<FetchPostsResDto>> findByTitleBoard(@RequestParam(required = false) String title) {
         try {
-            List<FetchPostsResDto> responseDto;
+            List<FetchPostsResDto> responseDto = null;
             if (title == null) {
-                responseDto = boardService.fetchAllBoard();
+                System.out.println("받은 쿼리 없음");
+                //responseDto = boardService.fetchAllBoard();
             } else {
                 responseDto = boardService.fetchByTitleBoard(title);
             }
