@@ -4,6 +4,7 @@ import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
 import com.example.demo.src.board.model.*;
 import com.example.demo.utils.JwtService;
+import com.example.demo.utils.Pagination;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,10 +58,14 @@ public class BoardController {
      */
     @ResponseBody
     @GetMapping("")
-    public BaseResponse<List<GetPostRes>> getPosts(@RequestParam(required = false) String writer){
+    public BaseResponse<List<GetPostRes>> getPosts(@RequestParam(required = false) String writer,
+                                                   @RequestParam(required = false) int page){
         try{
+            Pagination pagination = new Pagination();
+            pagination.setPage(page);
+
             if(writer == null){
-                List<GetPostRes> getPostsRes = boardProvider.getPosts();
+                List<GetPostRes> getPostsRes = boardProvider.getPosts(pagination);
                 return new BaseResponse<>(getPostsRes);
             }
             List<GetPostRes> getPostRes = boardProvider.getPostByWriter(writer);
@@ -88,4 +93,5 @@ public class BoardController {
             return new BaseResponse<>(exception.getStatus());
         }
     }
+
 }

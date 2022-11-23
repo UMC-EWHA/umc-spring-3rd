@@ -2,8 +2,8 @@ package com.example.demo.src.board;
 
 import com.example.demo.config.BaseException;
 import com.example.demo.src.board.model.GetPostRes;
-import com.example.demo.src.user.model.GetUserRes;
 import com.example.demo.utils.JwtService;
+import com.example.demo.utils.Pagination;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +26,9 @@ public class BoardProvider {
         this.jwtService = jwtService;
     }
 
-    public List<GetPostRes> getPosts() throws BaseException {
+    public List<GetPostRes> getPosts(Pagination pagination) throws BaseException {
         try {
-            List<GetPostRes> getPostRes = boardDao.getPosts();
+            List<GetPostRes> getPostRes = boardDao.getPosts(pagination);
             return getPostRes;
         } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
@@ -37,6 +37,7 @@ public class BoardProvider {
 
     public List<GetPostRes> getPostByWriter(String writer) throws BaseException {
         try {
+
             List<GetPostRes> getPostRes = boardDao.getPostsByWriter(writer);
             return getPostRes;
         } catch (Exception exception) {
