@@ -1,14 +1,14 @@
 package umc.crud.src.board.model;
 
-public class BoardDto {
+public class Board {
     private int boardId;
     private String content;
     private String writer;
 
-    public BoardDto() {
+    public Board() {
     }
 
-    public BoardDto(int boardId, String content, String writer) {
+    public Board(int boardId, String content, String writer) {
         this.boardId = boardId;
         this.content = content;
         this.writer = writer;
