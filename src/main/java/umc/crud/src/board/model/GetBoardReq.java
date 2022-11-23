@@ -1,4 +1,4 @@
-package umc.crud.board.model;
+package umc.crud.src.board.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor // 해당 클래스의 모든 멤버 변수를 받는 생성자 생성
 @NoArgsConstructor // 해당 클래스의 파라미터가 없는 생성자를 생성
-public class PostBoardRes {
+public class GetBoardReq {
     private int boardId;
     private String content;
     private String writer;
