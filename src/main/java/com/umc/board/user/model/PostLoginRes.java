@@ -1,4 +1,4 @@
-package com.umc.board.model;
+package com.umc.board.user.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,9 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class User {
+// 로그인의 결과
+public class PostLoginRes {
     private int userIdx;
-    private String email;
-    private String password;
-    private String nickname;
 }
