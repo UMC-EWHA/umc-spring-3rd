@@ -1,4 +1,4 @@
-package com.umcewha.board.user.model;
+package com.umcewha.board.src.user.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,8 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class PostUserReq {
+public class PostUserRes {
     private int userIdx;
-    private String username;
-    private String password;
+    private String jwt;
 }
