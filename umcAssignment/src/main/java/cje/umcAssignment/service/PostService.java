@@ -1,10 +1,10 @@
 package cje.umcAssignment.service;
 
-import cje.umcAssignment.domain.PostRequestDto;
-import cje.umcAssignment.domain.PostResponseDto;
+import cje.umcAssignment.model.PostRequestDto;
+import cje.umcAssignment.model.PostResponseDto;
+import cje.umcAssignment.model.SearchDto;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface PostService {
     /*
@@ -19,8 +19,9 @@ public interface PostService {
 
     /*
      * 모든 Post 보기
+     * paging 적용, SearchDto를 파라미터로 받기
      * */
-    public List<PostResponseDto> findAll();
+    public List<PostResponseDto> findAll(SearchDto searchDto);
 
     /*
      * writer로 Post 보기

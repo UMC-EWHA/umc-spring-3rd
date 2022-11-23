@@ -1,6 +1,6 @@
 package cje.umcAssignment.repository;
 
-import cje.umcAssignment.domain.Post;
+import cje.umcAssignment.model.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

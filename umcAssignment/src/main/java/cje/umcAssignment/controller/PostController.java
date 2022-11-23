@@ -1,10 +1,9 @@
 package cje.umcAssignment.controller;
 
-import cje.umcAssignment.domain.PostRequestDto;
-import cje.umcAssignment.domain.PostResponseDto;
+import cje.umcAssignment.model.PostRequestDto;
+import cje.umcAssignment.model.PostResponseDto;
 import cje.umcAssignment.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

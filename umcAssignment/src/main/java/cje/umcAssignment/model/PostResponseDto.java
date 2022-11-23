@@ -1,4 +1,4 @@
-package cje.umcAssignment.domain;
+package cje.umcAssignment.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

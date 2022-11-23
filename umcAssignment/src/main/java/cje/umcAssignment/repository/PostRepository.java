@@ -1,6 +1,6 @@
 package cje.umcAssignment.repository;
 
-import cje.umcAssignment.domain.Post;
+import cje.umcAssignment.model.Post;
 
 import java.util.List;
 import java.util.Optional;

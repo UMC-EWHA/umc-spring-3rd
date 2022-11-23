@@ -1,7 +1,6 @@
-package cje.umcAssignment.domain;
+package cje.umcAssignment.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
