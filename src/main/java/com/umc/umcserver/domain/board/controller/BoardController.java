@@ -1,7 +1,7 @@
-package com.umc.umcserver.controller;
+package com.umc.umcserver.domain.board.controller;
 
-import com.umc.umcserver.dto.*;
-import com.umc.umcserver.service.BoardService;
+import com.umc.umcserver.domain.board.dto.*;
+import com.umc.umcserver.domain.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

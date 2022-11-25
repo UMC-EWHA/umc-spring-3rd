@@ -1,8 +1,8 @@
-package com.umc.umcserver.service;
+package com.umc.umcserver.domain.board.service;
 
-import com.umc.umcserver.dto.*;
-import com.umc.umcserver.repository.Board;
-import com.umc.umcserver.repository.BoardRepository;
+import com.umc.umcserver.domain.board.dto.*;
+import com.umc.umcserver.domain.board.repository.Board;
+import com.umc.umcserver.domain.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
