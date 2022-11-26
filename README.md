@@ -2,7 +2,12 @@
 > UMC-EWHA 3rd Server-Spring Mission
 <br>
 
-## Mission List
+## 🛠 Tech Stack
+<img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=for-the-badge&logo=SpringBoot&logoColor=white"> <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
+<br>
+<br>
+
+## 📌 Mission List
 |Week|Topic|Code|
 |:--:|:--:|:----:|
 |Week6|Backend Language||
@@ -10,7 +15,7 @@
 |Week8|Client Intro||
 <br>
 
-## Project Structure
+## 💻 Project Structure
 ```
 .
 ├── HELP.md
