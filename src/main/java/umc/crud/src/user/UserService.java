@@ -48,7 +48,7 @@ public class UserService {
         try {
             // 암호화: postUserReq에서 제공받은 비밀번호를 암호화해 DB에 저장
             // ex) password123 -> dfhsjfkjdsnj4@!$!@chdsnjfwkenjfnsjfnjsd.fdsfaifsadjfjaf
-            pwd = new AES128(Secret.USER_INFO_PASSWORD_KEY).encrypt(postUserReq.getPassword()); // 암호화
+            pwd = new AES128(Secret.USER_PASSWORD_KEY).encrypt(postUserReq.getPassword()); // 암호화
             postUserReq.setPassword(pwd);
         } catch (Exception ignored) { // 암호화에 실패할 경우 에러 발생
             throw new BaseException(PASSWORD_ENCRYPTION_ERROR);

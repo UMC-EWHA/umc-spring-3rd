@@ -47,7 +47,7 @@ public class UserProvider {
         User user = userDao.getPwd(postLoginReq);
         String password;
         try {
-            password = new AES128(Secret.USER_INFO_PASSWORD_KEY).decrypt(user.getPassword()); // 암호화
+            password = new AES128(Secret.USER_PASSWORD_KEY).decrypt(user.getPassword()); // 복호화
             // 회원가입할 때 비밀번호가 암호화되어 저장되었기 떄문에 로그인 시애도 암호화된 값끼리 비교
         } catch (Exception ignored) {
             throw new BaseException(PASSWORD_DECRYPTION_ERROR);
