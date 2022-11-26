@@ -7,9 +7,12 @@ import com.example.demo.config.BaseResponse;
 import com.example.demo.src.user.model.*;
 import com.example.demo.utils.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 
 import static com.example.demo.config.BaseResponseStatus.*;
@@ -69,6 +72,11 @@ public class UserController {
         //이메일 정규표현: 입력받은 이메일이 email@domain.xxx와 같은 형식인지 검사합니다. 형식이 올바르지 않다면 에러 메시지를 보냅니다.
         if (!isRegexEmail(postUserReq.getEmail())) {
             return new BaseResponse<>(POST_USERS_INVALID_EMAIL);
+        }
+        // 비밀번호 정규표현: 최소 5자, 하나 이상의 문자 및 숫자
+        String pattern  = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{5,}$";
+        if (!postUserReq.getPassword().matches(pattern)) {
+            return new BaseResponse<>(POST_USERS_INVALID_PASSWD);
         }
         try {
             PostUserRes postUserRes = userService.createUser(postUserReq);

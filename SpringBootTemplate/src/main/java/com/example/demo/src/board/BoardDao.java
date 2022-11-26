@@ -30,6 +30,8 @@ public class BoardDao {
     }
 
     public List<GetPostRes> getPosts(Pagination pagination) {
+        // select * from [table] limit ? offset ?
+        // offset으로부터 limit개 만큼 데이터 출력
         String getPostsQuery = "select * from Posts limit ? offset ?";
         Object[] getPostsParams = new Object[]{pagination.getLimit(), pagination.getOffSet()};
         return this.jdbcTemplate.query(getPostsQuery,
