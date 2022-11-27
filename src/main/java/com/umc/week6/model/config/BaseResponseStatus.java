@@ -26,7 +26,11 @@ public enum BaseResponseStatus {
     USERS_EMPTY_USER_ID(false, 2010, "유저 아이디 값을 확인해주세요."),
 
     // [POST] /users
+<<<<<<< HEAD
     POST_USERS_EMPTY_POSTNUM(false, 2015, "게시물 번호를 입력해주세요."),
+=======
+    POST_USERS_EMPTY_EMAIL(false, 2015, "이메일을 입력해주세요."),
+>>>>>>> 397429a82683d49f82429bace9d31c5735094f01
     POST_USERS_INVALID_EMAIL(false, 2016, "이메일 형식을 확인해주세요."),
     POST_USERS_EXISTS_POSTNUM(false,2017,"중복된 게시물 번호입니다."),
 

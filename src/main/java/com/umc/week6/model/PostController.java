@@ -8,7 +8,10 @@ import java.util.List;
 
 import com.umc.week6.model.config.BaseException;
 import com.umc.week6.model.config.BaseResponse;
+<<<<<<< HEAD
 import com.umc.week6.model.config.BaseResponseStatus;
+=======
+>>>>>>> 397429a82683d49f82429bace9d31c5735094f01
 
 @RestController
 @RequestMapping("/posts")
@@ -31,10 +34,13 @@ public class PostController {
     @ResponseBody
     @PostMapping("")
     public BaseResponse<Post> registerPost(@RequestBody Post post) {
+<<<<<<< HEAD
         if (post.getTitle() == null){
             Post postt=postService.registerPost(post);
             return new BaseResponse<>(postt);
         }
+=======
+>>>>>>> 397429a82683d49f82429bace9d31c5735094f01
         try{
             Post postt=postService.registerPost(post);
             return new BaseResponse<>(postt);
