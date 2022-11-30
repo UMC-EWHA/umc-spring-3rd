@@ -1,4 +1,4 @@
-package com.umc.umcserver.dto;
+package com.umc.umcserver.domain.board.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.umc.umcserver.repository;
+package com.umc.umcserver.domain.board.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

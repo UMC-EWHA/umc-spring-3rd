@@ -1,23 +1,18 @@
-package com.umc.umcserver.dto;
+package com.umc.umcserver.domain.board.dto;
 
-import com.umc.umcserver.repository.Board;
+import com.umc.umcserver.domain.board.repository.Board;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.data.domain.Pageable;
-
-import java.util.List;
 
 @Getter
 @AllArgsConstructor
-public class FetchPostsResDto {
+public class UpdatePostsResDto {
     private Long id;
     private String title;
     private String content;
     private String writer;
-    private Pageable pageable;
 
-
-    public FetchPostsResDto(Board entity) {
+    public UpdatePostsResDto(Board entity) {
         this.id = entity.getId();
         this.title = entity.getTitle();
         this.content = entity.getContent();
