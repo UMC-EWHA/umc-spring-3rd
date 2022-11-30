@@ -59,13 +59,14 @@ public class BoardController {
     @ResponseBody
     @GetMapping("")
     public BaseResponse<List<GetPostRes>> getPosts(@RequestParam(required = false) String writer,
-                                                   @RequestParam(required = false) int page){
+                                                   @RequestParam(required = false) int page){ // query string으로 page 전달받음
         try{
+            // 전달받은 page값 입력
             Pagination pagination = new Pagination();
-            pagination.setPage(page);
+            pagination.setPage(page); 
 
             if(writer == null){
-                List<GetPostRes> getPostsRes = boardProvider.getPosts(pagination);
+                List<GetPostRes> getPostsRes = boardProvider.getPosts(pagination); 
                 return new BaseResponse<>(getPostsRes);
             }
             List<GetPostRes> getPostRes = boardProvider.getPostByWriter(writer);

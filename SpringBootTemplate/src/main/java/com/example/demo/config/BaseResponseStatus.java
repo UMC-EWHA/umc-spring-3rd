@@ -1,5 +1,4 @@
 package com.example.demo.config;
-
 import lombok.Getter;
 
 /**
@@ -29,6 +28,7 @@ public enum BaseResponseStatus {
     POST_USERS_EMPTY_EMAIL(false, 2015, "이메일을 입력해주세요."),
     POST_USERS_INVALID_EMAIL(false, 2016, "이메일 형식을 확인해주세요."),
     POST_USERS_EXISTS_EMAIL(false,2017,"중복된 이메일입니다."),
+    POST_USERS_INVALID_PASSWD(false, 2018, "비밀번호는 최소 5자, 하나 이상의 문자 및 숫자입니다"),
 
     // [POST] /boards
     POST_BOARDS_EMPTY_TITLE(false, 2018, "제목을 입력해주세요."),
