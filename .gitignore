@@ -62,3 +62,6 @@ out/
 
 # application.properties
 application.properties
+
+# JWT Token Secret File
+Secret.java
