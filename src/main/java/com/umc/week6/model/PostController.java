@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import com.umc.week6.model.config.BaseException;
+import com.umc.week6.model.config.BaseResponse;
+import static com.umc.week6.model.config.BaseResponseStatus.*;
+
 @RestController
 @RequestMapping("/posts")
 public class PostController {
@@ -20,14 +24,23 @@ public class PostController {
     }
  
     @GetMapping("/{userid}")
-    public Post getPostByUserId(@PathVariable  String userid) {
+    public Post getPostByUserId(@PathVariable String userid) {
         return postProvider.getPostByUserId(userid);
     }
- 
+
+    @ResponseBody
     @PostMapping("")
-    public Post registerPost(@RequestBody Post post) {
- 
-        return postService.registerPost(post);
+    public BaseResponse<Post> registerPost(@RequestBody Post post) {
+        if (post.getTitle() == null){
+            return new BaseResponse<>(POST_USERS_EMPTY_TITLE);
+        }
+        try{
+            Post postt=postService.registerPost(post);
+            return new BaseResponse<>(postt);
+        } catch (BaseException exception) {
+            return new BaseResponse<>((exception.getStatus()));
+        }
+        //return postService.registerPost(post);
     }
  
     @PutMapping("/{userid}")

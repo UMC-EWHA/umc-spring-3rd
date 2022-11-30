@@ -48,7 +48,7 @@ public class PostDao {
         //getPostNum() 대소문자 구분...? 자꾸 값이 0으로 들어갔었음
         Object[] createPostParams = new Object[]{post.getPostnum(), post.getTitle(), post.getContent(), post.getUserid()}; // 동적 쿼리의 ?부분에 주입될 값
         this.jdbcTemplate.update(createPostQuery, createPostParams);
-        System.out.println(post.getPostnum());
+        //System.out.println(post.getPostnum());
 
         String lastInsertIdQuery = "select * from post where userid =?"; // 해당 userid을 만족하는 post를 조회하는 쿼리문
         String lastInsertIdParams = post.getUserid();
@@ -60,6 +60,14 @@ public class PostDao {
                         rs.getString("userid")),
                     lastInsertIdParams);      //getter쓰니까 get()을 못받아와서 그냥 함수 다 씀 Post.java에서...
     }
+
+    public int checkPostnum(int postnum) {
+        String checkPostnumQuery = "select exists(select postnum from post where postnum = ?)"; // User Table에 해당 email 값을 갖는 유저 정보가 존재하는가?
+        int checkPostnumParams = postnum; // 해당(확인할) 이메일 값
+        return this.jdbcTemplate.queryForObject(checkPostnumQuery,
+                int.class,
+                checkPostnumParams); // checkEmailQuery, checkEmailParams를 통해 가져온 값(intgud)을 반환한다. -> 쿼리문의 결과(존재하지 않음(False,0),존재함(True, 1))를 int형(0,1)으로 반환됩니다.
+    } 
  
     // Modify PostTitle
     public void updatePostTitle(String userid,Post post) {
