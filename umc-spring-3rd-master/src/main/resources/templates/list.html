@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Student List</title>
+  </head>
+  <body>
+    <div>
+      <table id="studentTable">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Birth</th>
+        </tr>
+        <!-- th: each를 이용하면 반복문을 이용할 수 있다. -->
+        <!-- th:each="student, studentStat: ${studentList}" 와 동일하며
+				  status를 명시하지 않더라도 앞의 "오브젝트명stat" 를 이용하여 접근 가능하다. -->
+        <tr th:each="student: ${list}">
+          <td th:text="${student.postnum}"></td>
+          <td th:text="${student.title}"></td>
+          <td th:text="${student.content}"></td>
+          <td th:text="${student.userid}"></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
