@@ -30,4 +30,8 @@ public class BoardProvider {
 
         return boardDao.getBoardByWriter(writer);
     }
+
+    public List<GetBoardRes> getBoardByBoardId(int boardId) {
+        return boardDao.getBoardByBoardId(boardId);
+    }
 }
