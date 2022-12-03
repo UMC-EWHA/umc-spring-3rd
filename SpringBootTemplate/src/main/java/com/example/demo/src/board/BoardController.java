@@ -76,7 +76,6 @@ public class BoardController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
-
     /*
      *게시글 내용 수정 API
      * [PATCH] / boards
