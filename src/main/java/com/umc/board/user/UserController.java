@@ -1,6 +1,7 @@
 package com.umc.board.user;
 
 import com.umc.board.user.model.*;
+import com.umc.board.utils.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +14,12 @@ public class UserController {
     @Autowired
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    @Autowired
+    private final JwtService jwtService;
+
+    public UserController(UserService userService, JwtService jwtService) {
         this.userService = userService;
+        this.jwtService = jwtService;
     }
 
     // 회원 가입 API
@@ -66,6 +71,10 @@ public class UserController {
     @PatchMapping("/{userIdx}")
     public String modifyUser(@PathVariable("userIdx") int userIdx, @RequestBody User user) {
         try {
+            int userIdxByJwt = jwtService.getUserIdx();
+            if (userIdx != userIdxByJwt) {
+                throw new Exception("권한이 없는 유저의 접근입니다.");
+            }
             userService.modifyUser(new PatchUserReq(userIdx, user.getName()));
             return "회원 정보가 수정되었습니다.";
         } catch (Exception e) {

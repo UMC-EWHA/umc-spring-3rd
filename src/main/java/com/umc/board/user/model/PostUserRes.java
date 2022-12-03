@@ -10,4 +10,5 @@ import lombok.Setter;
 // 회원 가입의 결과
 public class PostUserRes {
     private int userIdx;
+    private String jwt;
 }
