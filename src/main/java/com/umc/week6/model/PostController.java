@@ -9,6 +9,9 @@ import java.util.List;
 import com.umc.week6.model.config.BaseException;
 import com.umc.week6.model.config.BaseResponse;
 import static com.umc.week6.model.config.BaseResponseStatus.*;
+import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @RestController
 @RequestMapping("/posts")
