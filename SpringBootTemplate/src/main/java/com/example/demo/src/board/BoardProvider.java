@@ -26,13 +26,18 @@ public class BoardProvider {
         this.jwtService = jwtService;
     }
 
-    public List<GetPostRes> getPosts(Pagination pagination) throws BaseException {
+    /*public List<GetPostRes> getPosts(Pagination pagination) throws BaseException {
         try {
             List<GetPostRes> getPostRes = boardDao.getPosts(pagination);
             return getPostRes;
         } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
         }
+    }*/
+
+    public List<GetPostRes> getPosts() {
+            List<GetPostRes> getPostRes = boardDao.getPosts();
+            return getPostRes;
     }
 
     public List<GetPostRes> getPostByWriter(String writer) throws BaseException {
