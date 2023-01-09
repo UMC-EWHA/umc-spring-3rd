@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+ .container {
+ max-width: 560px;
+ }
+ </style>
+</head>
+<body>
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>Post</h2>
+    </div>
+    <div>
+        <label for="postId">Post ID</label>
+        <input type="text" id="postId" name="postId" class="form-control" value="1" readonly>
+    </div>
+    <div>
+        <label for="title">제목</label>
+        <input type="text" id="title" name="title" class="form-control" value="상품A" readonly>
+    </div>
+    <div>
+        <label for="content">내용</label>
+        <input type="text" id="content" name="content" class="form-control" value="내용A" readonly>
+    </div>
+    <hr class="my-4">
+    <div class="row">
+        <div class="col">
+            <button class="w-100 btn btn-primary btn-lg"
+                    onclick="location.href='editForm.html'" type="button">Post 수정</button>
+        </div>
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg"
+                    onclick="location.href='items.html'" type="button">목록으로</button>
+        </div>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
