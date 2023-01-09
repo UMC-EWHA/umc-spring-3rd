@@ -1,20 +1,23 @@
 package com.umc.board.user;
 
+import com.umc.board.config.Secret;
 import com.umc.board.user.model.*;
+import com.umc.board.utils.AES128;
+import com.umc.board.utils.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static org.apache.tomcat.util.net.openssl.ciphers.Encryption.AES128;
-
 @Service
 public class UserService {
     private final UserDao userDao;
+    private final JwtService jwtService;
 
     @Autowired
-    public UserService(UserDao userDao) {
+    public UserService(UserDao userDao, JwtService jwtService) {
         this.userDao = userDao;
+        this.jwtService = jwtService;
     }
 
     // 이메일 중복 확인
@@ -41,7 +44,8 @@ public class UserService {
 
         try {
             int userIdx = userDao.createUser(postUserReq);
-            return new PostUserRes(userIdx);
+            String jwt = jwtService.createJwt(userIdx);
+            return new PostUserRes(userIdx, jwt);
         } catch (Exception e) {
             throw new Exception("회원 가입 실패");
         }
@@ -70,7 +74,8 @@ public class UserService {
 
         if (postLoginReq.getPassword().equals(user.getPassword())) {
             int userIdx = userDao.getPassword(postLoginReq).getUserIdx();
-            return new PostLoginRes(userIdx);
+            String jwt = jwtService.createJwt(userIdx);
+            return new PostLoginRes(userIdx, jwt);
         } else {
             throw new Exception("로그인 실패");
         }
