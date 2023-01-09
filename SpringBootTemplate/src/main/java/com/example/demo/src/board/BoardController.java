@@ -10,7 +10,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.example.demo.config.BaseResponseStatus.*;
 
@@ -56,7 +59,7 @@ public class BoardController {
      *게시글 리스트 조회 API
      * [GET] / boards
      */
-    @ResponseBody
+    /*@ResponseBody
     @GetMapping("")
     public BaseResponse<List<GetPostRes>> getPosts(@RequestParam(required = false) String writer,
                                                    @RequestParam(required = false) int page){ // query string으로 page 전달받음
@@ -75,8 +78,28 @@ public class BoardController {
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }
-    }
+    }*/
+    @ResponseBody
+    @GetMapping("")
+    public Map<String, Object> getPosts(){ // query string으로 page 전달받음
+            List<Map<String, Object>> postList = new ArrayList<Map<String, Object>>();
 
+            Map<String, Object> post = null;
+            List<GetPostRes> getPostRes = boardProvider.getPosts();
+
+            for(GetPostRes s : getPostRes){
+                post = new HashMap<String, Object>();
+                post.put("title", s.getTitle());
+                post.put("content", s.getContent());
+                post.put("writer", s.getWriter());
+                postList.add(post);
+            }
+
+            Map<String, Object> Posts = new HashMap<String, Object>();
+            Posts.put("posts", postList);
+
+            return Posts;
+    }
     /*
      *게시글 내용 수정 API
      * [PATCH] / boards

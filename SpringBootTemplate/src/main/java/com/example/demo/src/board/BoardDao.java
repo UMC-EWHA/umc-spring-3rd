@@ -29,7 +29,7 @@ public class BoardDao {
         return this.jdbcTemplate.queryForObject(lastInsertIdQuery, int.class); // 해당 쿼리문의 결과 마지막으로 삽인된 유저의 userIdx번호를 반환한다.
     }
 
-    public List<GetPostRes> getPosts(Pagination pagination) {
+    /*public List<GetPostRes> getPosts(Pagination pagination) {
         // select * from [table] limit ? offset ?
         // offset으로부터 limit개 만큼 데이터 출력
         String getPostsQuery = "select * from Posts limit ? offset ?";
@@ -41,6 +41,18 @@ public class BoardDao {
                         rs.getString("writer"),
                         rs.getString("content")),
                 getPostsParams);
+    }*/
+    public List<GetPostRes> getPosts() {
+        String getPostsQuery = "select * from Posts";
+        //Object[] getPostsParams = new Object[]{pagination.getLimit(), pagination.getOffSet()};
+        return this.jdbcTemplate.query(getPostsQuery,
+                (rs, rowNum) -> new GetPostRes(
+                        rs.getInt("postIdx"),
+                        rs.getString("title"),
+                        rs.getString("writer"),
+                        rs.getString("content")
+                )
+        );
     }
 
     public List<GetPostRes> getPostsByWriter(String writer) {
