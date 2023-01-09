@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>PostList</title>
+  </head>
+  <body>
+	<h1>POST LIST</h1>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>postnum</th>
+				<th>title</th>
+				<th>content</th>
+                <th>userid</th>
+			</tr>
+		</thead>
+		<tbody>
+				<tr th:each="list : ${list}">
+					<td th:text="${list.postnum}">postnum</td>
+                    <td th:text="${list.title}">title</td>
+                    <td th:text="${list.content}">content</td>
+                    <td th:text="${list.userid}">userid</td>
+				</tr>
+			</c:forEach>			
+		</tbody>
+	</table>
+
+</body>
+</html>

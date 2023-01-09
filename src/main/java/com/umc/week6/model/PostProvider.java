@@ -15,6 +15,7 @@ public class PostProvider {
     public List<Post> getAllPosts() {
         return postDao.getAllPosts();
     }
+    
 
     public int checkPostnum(int postnum) throws BaseException{
         try {
