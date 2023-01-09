@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CSS Template</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      /* Style the header */
+      header {
+        background-color: #008080;
+        padding: 10px;
+        text-align: center;
+        font-size: 35px;
+        color: white;
+      }
+
+      /* Container for flexboxes */
+      section {
+        display: -webkit-flex;
+        display: flex;
+      }
+
+      /* Style the navigation menu */
+      nav {
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        background: #ccc;
+        padding: 20px;
+      }
+
+      /* Style the list inside the menu */
+      nav ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      /* Style the content */
+      article {
+        -webkit-flex: 3;
+        -ms-flex: 3;
+        flex: 3;
+        background-color: #f1f1f1;
+        padding: 10px;
+      }
+
+      /* Style the footer */
+      footer {
+        background-color: #20b2aa;
+        padding: 10px;
+        text-align: center;
+        color: white;
+      }
+
+      /* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+      @media (max-width: 600px) {
+        section {
+          -webkit-flex-direction: column;
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h2>UMC Hyeonjeong</h2>
+    <p><strong>UMC:</strong> 리아 박현정 스탠다드 미션</p>
+
+    <header>
+      <h3>Board</h3>
+    </header>
+
+    <section>
+      <nav>
+        <ul class="boards">
+          <li><p>umc server</p></li>
+          <li><p>hyeonjeong's daily</p></li>
+          <li><p>study</p></li>
+        </ul>
+      </nav>
+
+      <article>
+        <h1>board</h1>
+        <p class="counts">작성한 게시글 내용</p>
+      </article>
+    </section>
+
+    <footer>
+      <button class="buttons" onclick="boardCount()">board count</button>
+      <button class="ajax" onclick="boardAjax()">게시글 불러오기</button>
+    </footer>
+  </body>
+
+  <script>
+    function boardCount() {
+      const boards = document.querySelector(".boards");
+      const counts = document.querySelector(".counts");
+      const boardCount = boards.childElementCount;
+      console.log(boardCount);
+      counts.textContent = boardCount;
+    }
+
+    function ajax() {
+      //json 형식으로 데이터 set
+      var params = {
+        title: $("#title").val(),
+        content: $("#content").val(),
+        writer: $("#writer").val(),
+      };
+
+      $.ajax({
+        url: "./posts",
+        type: "get",
+        data: params,
+        success: function (data) {
+          alert(`통신 성공 $data`);
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+          // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+          alert("통신 실패");
+        },
+      });
+    }
+  </script>
+</html>
