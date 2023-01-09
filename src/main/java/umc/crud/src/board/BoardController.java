@@ -1,6 +1,7 @@
 package umc.crud.src.board;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import umc.crud.config.BaseException;
 import umc.crud.config.BaseResponse;
@@ -46,9 +47,11 @@ public class BoardController {
      */
     @ResponseBody
     @GetMapping("")
-    public List<GetBoardRes> getAllBoards() {
-
-        return boardProvider.getAllBoards();
+    public String getAllBoards(Model model) {
+        List<GetBoardRes> boards = boardProvider.getAllBoards();
+        model.addAttribute("boards", boards);
+        //return boardProvider.getAllBoards();
+        return "/boards";
     }
 
     /**
@@ -58,8 +61,32 @@ public class BoardController {
     @GetMapping("/{writer}")
     public BaseResponse<List<GetBoardRes>> getBoardByWriter(@PathVariable String writer) {
         List<GetBoardRes> getBoardRes = boardProvider.getBoardByWriter(writer);
+
         return new BaseResponse<>(getBoardRes);
     }
+
+    /**
+     * 특정 글 조회
+     * GET /boards/{boardId}
+     */
+
+    @GetMapping("/{boardId}")
+    public String item(@PathVariable int boardId, Model model) {
+        List<GetBoardRes> board = boardProvider.getBoardByBoardId(boardId);
+        model.addAttribute("board", board);
+
+        return "/board";
+    }
+
+    /**
+     * 보드 추가
+     * GET /boards/addBoard
+     */
+    @GetMapping("/addBoard")
+    public String addBoard() {
+        return "addBoard";
+    }
+
 
     /**
      * 글 수정 API

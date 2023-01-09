@@ -40,7 +40,7 @@ public class BoardDao {
         );
     }
 
-    // 특정 글 조회
+    // writer로 특정 글 조회
     public List<GetBoardRes> getBoardByWriter(String writer) {
         String getBoardByWriterQuery = "select * from Board where writer = ?";
         String getBoardByWriterParams = writer;
@@ -51,6 +51,19 @@ public class BoardDao {
                         rs.getString("content"),
                         rs.getString("writer")),
                 getBoardByWriterParams);
+    }
+
+    // boardId로 특정 글 조회
+    public List<GetBoardRes> getBoardByBoardId(int boardId) {
+        String getBoardByBoardIdQuery = "select * from Board where boardId = ?";
+        int getBoardByBoardIdParams = boardId;
+
+        return this.jdbcTemplate.query(getBoardByBoardIdQuery,
+                (rs, rowNum) -> new GetBoardRes(
+                        rs.getInt("boardId"),
+                        rs.getString("content"),
+                        rs.getString("writer")),
+                getBoardByBoardIdParams);
     }
 
     // 글 수정
