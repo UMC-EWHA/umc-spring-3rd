@@ -16,7 +16,7 @@ spring jap, spring boot, mysql, aws
 | `5주차` | SQL 쿼리 작성, Datagrip에 더미데이터 입력 | [스탠다드 미션✨] | 
 | `6주차` | Spring boot & jpa로 CRUD API 개발 | [스탠다드 미션✨] |
 | `7주차` | Restful한 API 개발, EC2 서버 무중단 배포 | [스탠다드 미션✨] | 
-| `8주차` | 소셜로그인과 JWT 구 | [스탠다드 미션✨] | 
+| `8주차` | 소셜로그인과 JWT 구현 | [스탠다드 미션✨] | 
 
 <br>
 
